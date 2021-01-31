@@ -1,14 +1,13 @@
 import React from 'react';
-import { FlatList, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import {CATEGORIES} from '../data/dummy-data'
-import {Colors} from '../constants/colors'
-import {Platform} from 'expo'
+import CategoryTile from '../components/CategoryTile'
 
 const Categories = props => {
   const renderGridItem = (itemData) => (
-    <TouchableOpacity style={styles.gridItem} onPress={() => {props.navigation.navigate({routeName: 'CategoryMeals', params: {
+    <CategoryTile title={itemData.item.title} color={itemData.item.color} onPress={() => {props.navigation.navigate({routeName: 'CategoryMeals', params: {
       categoryId: itemData.item.id
-    }})}}><View><Text>{itemData.item.title}</Text></View></TouchableOpacity>
+    }})}} />
     )
   return (
     <FlatList data={CATEGORIES} renderItem={renderGridItem} numColumns={2} />
@@ -25,11 +24,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  gridItem: {
-    flex: 1,
-    margin: 15,
-    height: 150
-  }
+  
 });
 
 export default Categories;
